@@ -32,7 +32,7 @@ RUN yarn install --production --frozen-lockfile
 # Copy build artifacts and necessary files from build-stage
 COPY --from=build-stage /app/.next ./.next
 COPY --from=build-stage /app/public ./public
-COPY --from=build-stage /app/next.config.js ./
+COPY --from=build-stage /app/next.config.mjs ./
 COPY --from=build-stage /app/package.json ./
 
 # Set environment variables (recommend passing these at runtime)
