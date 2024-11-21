@@ -118,6 +118,40 @@ const MovieForm = ({ initialData, onCancel }) => {
     multiple: false,
   });
 
+  const renderDropzoneContent = () => {
+    if (uploading) {
+      return <p>Uploading...</p>;
+    }
+
+    if (isDragActive) {
+      return <p>Drop the image here...</p>;
+    }
+
+    if (selectedFile?.filename) {
+      return (
+        <div>
+          <img
+            src={`/api/images/${selectedFile?.filename}` || movieDetails?.image}
+            alt="Uploaded Preview"
+            style={{
+              width: "100%",
+              maxWidth: "300px",
+              marginBottom: "10px",
+            }}
+          />
+          <p>Drag and drop another image to replace</p>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <UploadImageIcon />
+        <p>Drop an image here</p>
+      </div>
+    );
+  };
+
   return (
     <MovieFormContainer>
       <h2>{movieId ? "Update Movie" : "Create a New Movie"}</h2>
@@ -133,32 +167,7 @@ const MovieForm = ({ initialData, onCancel }) => {
             }}
           >
             <input {...getInputProps()} />
-            {uploading ? (
-              <p>Uploading...</p>
-            ) : isDragActive ? (
-              <p>Drop the image here...</p>
-            ) : selectedFile?.filename ? (
-              <div>
-                <img
-                  src={
-                    `/api/images/${selectedFile?.filename}` ||
-                    movieDetails?.image
-                  }
-                  alt="Uploaded Preview"
-                  style={{
-                    width: "100%",
-                    maxWidth: "300px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <p>Drag and drop another image to replace</p>
-              </div>
-            ) : (
-              <div>
-                <UploadImageIcon />
-                <p>Drop an image here</p>
-              </div>
-            )}
+            {renderDropzoneContent()}
           </div>
 
           <div className="movie-info">
