@@ -27,7 +27,7 @@ const MovieForm = ({ initialData, onCancel }) => {
   const createMovie = async (data) => {
     const payload = {
       ...data,
-      image: selectedFile?.path,
+      image: selectedFile?.filename,
     };
     try {
       const { data, status } = await axios.post(`/api/movie`, payload);
