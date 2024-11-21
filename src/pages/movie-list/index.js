@@ -63,7 +63,7 @@ function MovieList() {
   const deleteMovie = async (movieId) => {
     try {
       const { data, status } = await axios.delete(
-        `${baseUrl}/api/movie?movieId=${movieId}`
+        `/api/movie?movieId=${movieId}`
       );
       if (data && status === 200) {
         toast.success(data?.message);

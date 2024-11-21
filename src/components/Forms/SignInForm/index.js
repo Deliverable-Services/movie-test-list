@@ -6,7 +6,6 @@ import { SignInContainer } from "./style";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { baseUrl } from "@/pages/movie-list";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -33,10 +32,7 @@ const SignInForm = () => {
       password: data?.password,
     };
     try {
-      const { data, status } = await axios.post(
-        `${baseUrl}/api/login`,
-        payload
-      );
+      const { data, status } = await axios.post(`/api/login`, payload);
       if (data && status === 200) {
         localStorage.setItem("moviesToken", data?.accessToken);
         localStorage.setItem("moviesData", JSON.stringify(data?.user));
