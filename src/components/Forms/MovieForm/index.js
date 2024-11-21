@@ -56,7 +56,7 @@ const MovieForm = ({ initialData, onCancel }) => {
   const updateMovie = async (data) => {
     const payload = {
       ...data,
-      image: selectedFile?.path,
+      image: selectedFile?.filename,
     };
     try {
       const { data, status } = await axios.put(
@@ -141,7 +141,10 @@ const MovieForm = ({ initialData, onCancel }) => {
               movieDetails?.image ? (
               <div>
                 <img
-                  src={selectedFile?.filename || movieDetails?.image}
+                  src={
+                    `/api/images/${selectedFile?.filename}` ||
+                    movieDetails?.image
+                  }
                   alt="Uploaded Preview"
                   style={{
                     width: "100%",
