@@ -8,6 +8,7 @@ import { UploadImageIcon } from "../../../../public/assets/images/icons";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/pages/movie-list";
 
 const MovieForm = ({ initialData, onCancel }) => {
   const methods = useForm({
@@ -30,7 +31,10 @@ const MovieForm = ({ initialData, onCancel }) => {
       image: selectedFile?.path,
     };
     try {
-      const { data, status } = await axios.post("/api/movie", payload);
+      const { data, status } = await axios.post(
+        `${baseUrl}/api/movie`,
+        payload
+      );
       if (data && status === 200) {
         toast.success(data?.message);
         reset();
@@ -43,7 +47,9 @@ const MovieForm = ({ initialData, onCancel }) => {
 
   const fetchMovieDetails = async () => {
     try {
-      const { data, status } = await axios.get(`/api/movie?movieId=${movieId}`);
+      const { data, status } = await axios.get(
+        `${baseUrl}/api/movie?movieId=${movieId}`
+      );
 
       if (data && status === 200) {
         setMovieDetails(data);
@@ -60,7 +66,7 @@ const MovieForm = ({ initialData, onCancel }) => {
     };
     try {
       const { data, status } = await axios.put(
-        `/api/movie?movieId=${movieId}`,
+        `${baseUrl}/api/movie?movieId=${movieId}`,
         payload
       );
       if (data && status === 200) {
@@ -96,11 +102,15 @@ const MovieForm = ({ initialData, onCancel }) => {
       formData.append("image", file);
 
       try {
-        const { data, status } = await axios.post("/api/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        const { data, status } = await axios.post(
+          `${baseUrl}/api/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
 
         if (data && status === 200) {
           setSelectedFile(data?.file);

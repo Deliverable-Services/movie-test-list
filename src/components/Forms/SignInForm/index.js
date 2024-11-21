@@ -6,6 +6,7 @@ import { SignInContainer } from "./style";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/pages/movie-list";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const SignInForm = () => {
     };
     try {
       const { data, status } = await axios.post(
-        "http://localhost:3000/api/login",
+        `${baseUrl}/api/login`,
         payload
       );
       if (data && status === 200) {

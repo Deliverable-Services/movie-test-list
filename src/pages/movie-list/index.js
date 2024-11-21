@@ -8,6 +8,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Spinner from "@/components/Spinner";
 
+export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
 function MovieList() {
   const router = useRouter();
   const [movies, setMovies] = useState([]);
@@ -44,7 +46,7 @@ function MovieList() {
   const fetchMovies = async () => {
     try {
       const { data, status } = await axios.get(
-        `/api/movie?page=${currentPage}`
+        `${baseUrl}/api/movie?page=${currentPage}`
       );
       if (data && status === 200) {
         setMovies(data?.movies);
@@ -61,7 +63,7 @@ function MovieList() {
   const deleteMovie = async (movieId) => {
     try {
       const { data, status } = await axios.delete(
-        `/api/movie?movieId=${movieId}`
+        `${baseUrl}/api/movie?movieId=${movieId}`
       );
       if (data && status === 200) {
         toast.success(data?.message);
