@@ -137,10 +137,11 @@ const MovieForm = ({ initialData, onCancel }) => {
               <p>Uploading...</p>
             ) : isDragActive ? (
               <p>Drop the image here...</p>
-            ) : selectedFile?.path || movieDetails?.image ? (
+            ) : `/api/images/${selectedFile?.filename}` ||
+              movieDetails?.image ? (
               <div>
                 <img
-                  src={selectedFile?.path || movieDetails?.image}
+                  src={selectedFile?.filename || movieDetails?.image}
                   alt="Uploaded Preview"
                   style={{
                     width: "100%",
