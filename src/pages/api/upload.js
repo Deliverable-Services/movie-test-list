@@ -67,10 +67,7 @@ export default async function handler(req, res) {
       createdAt: new Date(),
     };
 
-    const response = await axios.post(
-      "https://frontend-ongoing-movie-test.qmc4w5.easypanel.host/api/uploadEntry",
-      newImage
-    );
+    const response = await axios.post("/api/uploadEntry", newImage);
 
     if (!response.data.movie.acknowledged) {
       return res.status(500).json({ message: "Error uploading image" });
