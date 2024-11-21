@@ -68,7 +68,7 @@ export default async function handler(req, res) {
     };
 
     const response = await axios.post(
-      "http://localhost:3000/api/uploadEntry",
+      "https://frontend-ongoing-movie-test.qmc4w5.easypanel.host/api/uploadEntry",
       newImage
     );
 

@@ -44,7 +44,7 @@ function MovieList() {
   const fetchMovies = async () => {
     try {
       const { data, status } = await axios.get(
-        `http://localhost:3000/api/movie?page=${currentPage}`
+        `/api/movie?page=${currentPage}`
       );
       if (data && status === 200) {
         setMovies(data?.movies);
@@ -61,7 +61,7 @@ function MovieList() {
   const deleteMovie = async (movieId) => {
     try {
       const { data, status } = await axios.delete(
-        `http://localhost:3000/api/movie?movieId=${movieId}`
+        `/api/movie?movieId=${movieId}`
       );
       if (data && status === 200) {
         toast.success(data?.message);

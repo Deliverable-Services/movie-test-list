@@ -1,7 +1,7 @@
 export async function getServerSideProps() {
   return {
     redirect: {
-      destination: "/movie-list",
+      destination: "/sign-in",
       permanent: true,
     },
   };
