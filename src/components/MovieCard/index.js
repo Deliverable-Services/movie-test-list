@@ -18,6 +18,7 @@ const MovieCard = ({
   return (
     <MovieCardContainer>
       <img src={`/api/images/${image}`} alt={title} className="movie-image" />
+      <img src={`/api/images/${image}`} alt={title} className="movie-image" />
       <div className="movie-info">
         <div
           style={{
