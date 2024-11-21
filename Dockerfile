@@ -35,6 +35,9 @@ COPY --from=build-stage /app/public ./public
 COPY --from=build-stage /app/next.config.mjs ./
 COPY --from=build-stage /app/package.json ./
 
+# Change ownership of the public folder
+RUN chown -R nextjs:nextjs ./public
+
 # Set environment variables (recommend passing these at runtime)
 ENV NODE_ENV=production
 # Note: Pass MONGO_URI and JWT_SECRET via Docker `--env` flags or in a .env file
