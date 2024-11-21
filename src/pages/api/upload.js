@@ -67,7 +67,16 @@ export default async function handler(req, res) {
       createdAt: new Date(),
     };
 
-    const response = await axios.post("/api/uploadEntry", newImage);
+    const protocol =
+      req.headers["x-forwarded-proto"] ||
+      (req.connection.encrypted ? "https" : "http");
+
+    const host = req.headers["host"];
+
+    const response = await axios.post(
+      `${protocol}://${host}/api/uploadEntry`,
+      newImage
+    );
 
     if (!response.data.movie.acknowledged) {
       return res.status(500).json({ message: "Error uploading image" });
@@ -77,6 +86,7 @@ export default async function handler(req, res) {
       .status(200)
       .json({ message: "Image uploaded successfully", file: newImage });
   } catch (error) {
+    console.log(error, ":::");
     return res.status(500).json({ message: "Error uploading image" });
   }
 }

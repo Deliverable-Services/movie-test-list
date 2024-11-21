@@ -96,7 +96,7 @@ const MovieForm = ({ initialData, onCancel }) => {
       formData.append("image", file);
 
       try {
-        const { data, status } = await axios.post(`/api/upload`, formData, {
+        const { data, status } = await axios.post("/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
