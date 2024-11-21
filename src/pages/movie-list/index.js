@@ -46,7 +46,7 @@ function MovieList() {
   const fetchMovies = async () => {
     try {
       const { data, status } = await axios.get(
-        `${baseUrl}/api/movie?page=${currentPage}`
+        `/api/movie?page=${currentPage}`
       );
       if (data && status === 200) {
         setMovies(data?.movies);
